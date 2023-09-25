@@ -1,8 +1,6 @@
 import os
 
 from torchvision import datasets
-from PIL import Image
-
 
 train_data = datasets.MNIST(root="./data", train=True, download=True)
 

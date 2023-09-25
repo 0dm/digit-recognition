@@ -1,11 +1,12 @@
 import argparse
-import torch
-from torch import nn, optim
-from torchvision import datasets, transforms
+from time import time
+
 import matplotlib.pyplot as plt
 import numpy as np
-from time import time
+import torch
 from PIL import Image
+from torch import nn, optim
+from torchvision import datasets, transforms
 
 
 def view_classify(img, ps):
