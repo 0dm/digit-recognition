@@ -76,7 +76,7 @@ def test_model(model, valloader):
                 if true_label == pred_label:
                     correct_count += 1
                 all_count += 1
-
+    view_classify(img.view(1, 28, 28), ps)
     print("Number Of Images Tested =", all_count)
     print("\nModel Accuracy =", (correct_count / all_count))
 
@@ -136,10 +136,12 @@ def main():
             ps = torch.exp(logps)
             probab = list(ps.numpy()[0])
             predicted_digit = probab.index(max(probab))
+            view_classify(img.view(1, 28, 28), ps)
             print("Predicted Digit =", predicted_digit)
         else:
             # Test the model on the entire test set
             test_model(model, valloader)
+        plt.show()
 
 
 if __name__ == "__main__":
