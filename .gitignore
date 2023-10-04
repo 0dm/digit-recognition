@@ -2,3 +2,4 @@
 *.pt
 *ubyte
 *.gz
+.DS_Store

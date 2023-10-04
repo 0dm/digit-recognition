@@ -9,7 +9,13 @@ from torch import nn, optim
 from torchvision import datasets, transforms
 
 
-def view_classify(img, ps):
+def view_classify(img, ps) -> None:
+    """Function for viewing an image and it's predicted classes.
+
+    Arguments:
+        img (tensor): image tensor
+        ps (tensor): predicted class probabilities
+    """
     ps = ps.data.numpy().squeeze()
     fig, (ax1, ax2) = plt.subplots(figsize=(6, 9), ncols=2)
     ax1.imshow(img.resize_(1, 28, 28).numpy().squeeze())
@@ -23,8 +29,15 @@ def view_classify(img, ps):
     plt.tight_layout()
 
 
-def load_data(train=True):
-    # Function to load MNIST dataset
+def load_data(train=True) -> torch.utils.data.DataLoader:
+    """Load the MNIST dataset.
+
+    Arguments:
+        train (bool): whether to load the training or testing set
+
+    Returns:
+        dataloader (DataLoader): the dataloader for the specified set
+    """
     transform = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
     )
@@ -39,8 +52,16 @@ def load_data(train=True):
     return dataloader
 
 
-def train_model(model, trainloader, epochs=15, lr=0.003, momentum=0.9):
-    # Function to train the model
+def train_model(model, trainloader, epochs=15, lr=0.003, momentum=0.9) -> None:
+    """Train the model.
+
+    Arguments:
+        model (Sequential): the model to train
+        trainloader (DataLoader): the dataloader for the training set
+        epochs (int): the number of epochs to train the model for
+        lr (float): the learning rate
+        momentum (float): the momentum
+    """
     criterion = nn.NLLLoss()
     optimizer = optim.SGD(model.parameters(), lr=lr, momentum=momentum)
 
@@ -61,8 +82,14 @@ def train_model(model, trainloader, epochs=15, lr=0.003, momentum=0.9):
     print("\nTraining Time (in minutes) =", (time() - time0) / 60)
 
 
-def test_model(model, valloader):
-    # Function to test the model
+def test_model(model: nn.Sequential, valloader: torch.utils.data.DataLoader) -> None:
+    """Test the model.
+
+    Arguments:
+        model (Sequential): the model to test
+        valloader (DataLoader): the dataloader for the testing set
+    """
+
     correct_count, all_count = 0, 0
     with torch.no_grad():
         for images, labels in valloader:
@@ -81,7 +108,8 @@ def test_model(model, valloader):
     print("\nModel Accuracy =", (correct_count / all_count))
 
 
-def main():
+def main() -> None:
+    """Main function."""
     parser = argparse.ArgumentParser(description="MNIST Model Training and Testing")
 
     parser.add_argument("--train", action="store_true", help="Train the model")
