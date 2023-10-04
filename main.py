@@ -9,7 +9,7 @@ from torch import nn, optim
 from torchvision import datasets, transforms
 
 
-def view_classify(img, ps) -> None:
+def view_classify(img: torch.Tensor, ps: torch.Tensor) -> None:
     """Function for viewing an image and it's predicted classes.
 
     Arguments:
@@ -29,7 +29,7 @@ def view_classify(img, ps) -> None:
     plt.tight_layout()
 
 
-def load_data(train=True) -> torch.utils.data.DataLoader:
+def load_data(train: bool = True) -> torch.utils.data.DataLoader:
     """Load the MNIST dataset.
 
     Arguments:
@@ -52,7 +52,13 @@ def load_data(train=True) -> torch.utils.data.DataLoader:
     return dataloader
 
 
-def train_model(model, trainloader, epochs=15, lr=0.003, momentum=0.9) -> None:
+def train_model(
+    model: nn.Sequential,
+    trainloader: torch.utils.data.DataLoader,
+    epochs: int = 15,
+    lr: float = 0.003,
+    momentum: float = 0.9,
+) -> None:
     """Train the model.
 
     Arguments:
