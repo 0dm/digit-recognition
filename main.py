@@ -16,6 +16,7 @@ def view_classify(img: torch.Tensor, ps: torch.Tensor) -> None:
         img (tensor): image tensor
         ps (tensor): predicted class probabilities
     """
+
     ps = ps.data.numpy().squeeze()
     fig, (ax1, ax2) = plt.subplots(figsize=(6, 9), ncols=2)
     ax1.imshow(img.resize_(1, 28, 28).numpy().squeeze())
@@ -38,6 +39,7 @@ def load_data(train: bool = True) -> torch.utils.data.DataLoader:
     Returns:
         dataloader (DataLoader): the dataloader for the specified set
     """
+
     transform = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
     )
@@ -68,6 +70,7 @@ def train_model(
         lr (float): the learning rate
         momentum (float): the momentum
     """
+
     criterion = nn.NLLLoss()
     optimizer = optim.SGD(model.parameters(), lr=lr, momentum=momentum)
 
@@ -116,6 +119,7 @@ def test_model(model: nn.Sequential, valloader: torch.utils.data.DataLoader) -> 
 
 def main() -> None:
     """Main function."""
+
     parser = argparse.ArgumentParser(description="MNIST Model Training and Testing")
 
     parser.add_argument("--train", action="store_true", help="Train the model")
