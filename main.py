@@ -21,8 +21,7 @@ class ReLU(nn.Module):
         # TODO: Fix the ReLU activation function (hint: use torch.max)
 
 
-""" Workshop Exercise 2: How many neurons should we have in the input layer? 
-HINT: The images are 28x28 pixels, and need to be flattened to a 1D tensor"""
+""" Workshop Exercise 2: How many neurons should we have in the input layer? """
 INPUT_N = 1
 
 """ Workshop Exercise 3: How many neurons should we have in the output layer? """
