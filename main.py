@@ -18,17 +18,17 @@ class ReLU(nn.Module):
 
     def forward(self, x: torch.Tensor):
         zero_tensor = torch.zeros_like(x)
-        # TODO: Fix the ReLU activation function (hint: use torch.max)
+        return torch.max(x, zero_tensor)
 
 
 """ Workshop Exercise 2: How many neurons should we have in the input layer? """
-INPUT_N = 1
+INPUT_N = 784
 
 """ Workshop Exercise 3: How many neurons should we have in the output layer? """
-OUTPUT_N = 1
+OUTPUT_N = 10
 
 """ Workshop Exercise 4: How many times should we go through the training data? """
-EPOCHS = 0
+EPOCHS = 15
 
 """
 additional exercises (see extract.py):
