@@ -9,6 +9,31 @@ from torch import nn, optim
 from torchvision import datasets, transforms
 
 
+""" Workshop Exercise 1: Fix the ReLU activation function """
+
+
+class ReLU(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x: torch.Tensor):
+        zero_tensor = torch.zeros_like(x)
+        # TODO: Fix the ReLU activation function (hint: use torch.max)
+
+
+""" Workshop Exercise 2: How many neurons should we have in the output layer? """
+OUTPUT_N = 1
+
+""" Workshop Exercise 3: How many times should we go through the training data? """
+EPOCHS = 0
+
+"""
+additional exercises (see extract.py):
+4. Save more images from the training data
+5. Name the images according to their labels, preferably using the model's predictions
+"""
+
+
 def view_classify(img: torch.Tensor, ps: torch.Tensor) -> None:
     """Function for viewing an image and it's predicted classes.
 
@@ -21,10 +46,10 @@ def view_classify(img: torch.Tensor, ps: torch.Tensor) -> None:
     fig, (ax1, ax2) = plt.subplots(figsize=(6, 9), ncols=2)
     ax1.imshow(img.resize_(1, 28, 28).numpy().squeeze())
     ax1.axis("off")
-    ax2.barh(np.arange(10), ps)
+    ax2.barh(np.arange(OUTPUT_N), ps)
     ax2.set_aspect(0.1)
-    ax2.set_yticks(np.arange(10))
-    ax2.set_yticklabels(np.arange(10))
+    ax2.set_yticks(np.arange(OUTPUT_N))
+    ax2.set_yticklabels(np.arange(OUTPUT_N))
     ax2.set_title("Class Probability")
     ax2.set_xlim(0, 1.1)
     plt.tight_layout()
@@ -57,7 +82,7 @@ def load_data(train: bool = True) -> torch.utils.data.DataLoader:
 def train_model(
     model: nn.Sequential,
     trainloader: torch.utils.data.DataLoader,
-    epochs: int = 15,
+    epochs: int = EPOCHS,
     lr: float = 0.003,
     momentum: float = 0.9,
 ) -> None:
@@ -131,13 +156,13 @@ def main() -> None:
     # Create the model
     input_size = 784
     hidden_sizes = [128, 64]
-    output_size = 10
+    output_size = OUTPUT_N
 
     model = nn.Sequential(
         nn.Linear(input_size, hidden_sizes[0]),
-        nn.ReLU(),
+        ReLU(),
         nn.Linear(hidden_sizes[0], hidden_sizes[1]),
-        nn.ReLU(),
+        ReLU(),
         nn.Linear(hidden_sizes[1], output_size),
         nn.LogSoftmax(dim=1),
     )
