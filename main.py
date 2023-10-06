@@ -21,16 +21,20 @@ class ReLU(nn.Module):
         # TODO: Fix the ReLU activation function (hint: use torch.max)
 
 
-""" Workshop Exercise 2: How many neurons should we have in the output layer? """
+""" Workshop Exercise 2: How many neurons should we have in the input layer? 
+HINT: The images are 28x28 pixels, and need to be flattened to a 1D tensor"""
+INPUT_N = 1
+
+""" Workshop Exercise 3: How many neurons should we have in the output layer? """
 OUTPUT_N = 1
 
-""" Workshop Exercise 3: How many times should we go through the training data? """
+""" Workshop Exercise 4: How many times should we go through the training data? """
 EPOCHS = 0
 
 """
 additional exercises (see extract.py):
-4. Save more images from the training data
-5. Name the images according to their labels, preferably using the model's predictions
+5. Save more images from the training data
+6. Name the images according to their labels, preferably using the model's predictions
 """
 
 
@@ -154,7 +158,7 @@ def main() -> None:
     args = parser.parse_args()
 
     # Create the model
-    input_size = 784
+    input_size = INPUT_N
     hidden_sizes = [128, 64]
     output_size = OUTPUT_N
 
